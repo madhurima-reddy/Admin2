@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OnlineExam1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin_Module">
+          <Key>
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Admin_id" Type="int" Nullable="false" />
+          <Property Name="Email_id" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Course_id" />
+          </Key>
+          <Property Name="Course_id" Type="int" Nullable="false" />
+          <Property Name="Course_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Minimum_marks" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="Question_id" />
+          </Key>
+          <Property Name="Question_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Course_id" Type="int" />
+          <Property Name="Level_id" Type="int" />
+          <Property Name="Question_No" Type="int" />
+          <Property Name="Question" Type="varchar" MaxLength="300" />
+          <Property Name="Option_1" Type="varchar" MaxLength="200" />
+          <Property Name="Option_2" Type="varchar" MaxLength="200" />
+          <Property Name="Option_3" Type="varchar" MaxLength="200" />
+          <Property Name="Option_4" Type="varchar" MaxLength="200" />
+          <Property Name="Correct_answer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Report_card">
+          <Key>
+            <PropertyRef Name="ReportCard_id" />
+          </Key>
+          <Property Name="ReportCard_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="Course_id" Type="int" />
+          <Property Name="Level_1_Marks" Type="int" />
+          <Property Name="Level_2_Marks" Type="int" />
+          <Property Name="Level_3_Marks" Type="int" />
+          <Property Name="Test_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User_Module">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="Fullname" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Secondname" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="Phone_no" Type="bigint" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="10" />
+          <Property Name="City" Type="varchar" MaxLength="15" />
+          <Property Name="Date_of_birth" Type="date" />
+          <Property Name="Qualification" Type="varchar" MaxLength="15" />
+          <Property Name="Year_of_Completion" Type="int" />
+        </EntityType>
+        <Association Name="FK__Questions__Cours__3C69FB99">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report_ca__Cours__403A8C7D">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Report_card" Type="Self.Report_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_id" />
+            </Principal>
+            <Dependent Role="Report_card">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report_ca__Test___3F466844">
+          <End Role="User_Module" Type="Self.User_Module" Multiplicity="1" />
+          <End Role="Report_card" Type="Self.Report_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Module">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Report_card">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineExam1ModelStoreContainer">
+          <EntitySet Name="Admin_Module" EntityType="Self.Admin_Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report_card" EntityType="Self.Report_card" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Module" EntityType="Self.User_Module" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Questions__Cours__3C69FB99" Association="Self.FK__Questions__Cours__3C69FB99">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report_ca__Cours__403A8C7D" Association="Self.FK__Report_ca__Cours__403A8C7D">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Report_card" EntitySet="Report_card" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report_ca__Test___3F466844" Association="Self.FK__Report_ca__Test___3F466844">
+            <End Role="User_Module" EntitySet="User_Module" />
+            <End Role="Report_card" EntitySet="Report_card" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnlineExam1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin_Module">
+          <Key>
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Admin_id" Type="Int32" Nullable="false" />
+          <Property Name="Email_id" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Course_id" />
+          </Key>
+          <Property Name="Course_id" Type="Int32" Nullable="false" />
+          <Property Name="Course_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Minimum_marks" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK__Questions__Cours__3C69FB99" FromRole="Course" ToRole="Questions" />
+          <NavigationProperty Name="Report_card" Relationship="Self.FK__Report_ca__Cours__403A8C7D" FromRole="Course" ToRole="Report_card" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Question_id" />
+          </Key>
+          <Property Name="Question_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Course_id" Type="Int32" />
+          <Property Name="Level_id" Type="Int32" />
+          <Property Name="Question_No" Type="Int32" />
+          <Property Name="Question1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Option_1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Option_2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Option_3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Option_4" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Correct_answer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK__Questions__Cours__3C69FB99" FromRole="Questions" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Report_card">
+          <Key>
+            <PropertyRef Name="ReportCard_id" />
+          </Key>
+          <Property Name="ReportCard_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="Course_id" Type="Int32" />
+          <Property Name="Level_1_Marks" Type="Int32" />
+          <Property Name="Level_2_Marks" Type="Int32" />
+          <Property Name="Level_3_Marks" Type="Int32" />
+          <Property Name="Test_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Course" Relationship="Self.FK__Report_ca__Cours__403A8C7D" FromRole="Report_card" ToRole="Course" />
+          <NavigationProperty Name="User_Module" Relationship="Self.FK__Report_ca__Test___3F466844" FromRole="Report_card" ToRole="User_Module" />
+        </EntityType>
+        <EntityType Name="User_Module">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="Fullname" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Secondname" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_no" Type="Int64" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="Qualification" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Year_of_Completion" Type="Int32" />
+          <NavigationProperty Name="Report_card" Relationship="Self.FK__Report_ca__Test___3F466844" FromRole="User_Module" ToRole="Report_card" />
+        </EntityType>
+        <Association Name="FK__Questions__Cours__3C69FB99">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report_ca__Cours__403A8C7D">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Report_card" Type="Self.Report_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_id" />
+            </Principal>
+            <Dependent Role="Report_card">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report_ca__Test___3F466844">
+          <End Role="User_Module" Type="Self.User_Module" Multiplicity="1" />
+          <End Role="Report_card" Type="Self.Report_card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Module">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Report_card">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineExam1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin_Module" EntityType="Self.Admin_Module" />
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="Report_card" EntityType="Self.Report_card" />
+          <EntitySet Name="User_Module" EntityType="Self.User_Module" />
+          <AssociationSet Name="FK__Questions__Cours__3C69FB99" Association="Self.FK__Questions__Cours__3C69FB99">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report_ca__Cours__403A8C7D" Association="Self.FK__Report_ca__Cours__403A8C7D">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Report_card" EntitySet="Report_card" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report_ca__Test___3F466844" Association="Self.FK__Report_ca__Test___3F466844">
+            <End Role="User_Module" EntitySet="User_Module" />
+            <End Role="Report_card" EntitySet="Report_card" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnlineExam1ModelStoreContainer" CdmEntityContainer="OnlineExam1Entities">
+          <EntitySetMapping Name="Admin_Module">
+            <EntityTypeMapping TypeName="OnlineExam1Model.Admin_Module">
+              <MappingFragment StoreEntitySet="Admin_Module">
+                <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
+                <ScalarProperty Name="Email_id" ColumnName="Email_id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="OnlineExam1Model.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Course_id" ColumnName="Course_id" />
+                <ScalarProperty Name="Course_name" ColumnName="Course_name" />
+                <ScalarProperty Name="Minimum_marks" ColumnName="Minimum_marks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="OnlineExam1Model.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="Question_id" ColumnName="Question_id" />
+                <ScalarProperty Name="Course_id" ColumnName="Course_id" />
+                <ScalarProperty Name="Level_id" ColumnName="Level_id" />
+                <ScalarProperty Name="Question_No" ColumnName="Question_No" />
+                <ScalarProperty Name="Question1" ColumnName="Question" />
+                <ScalarProperty Name="Option_1" ColumnName="Option_1" />
+                <ScalarProperty Name="Option_2" ColumnName="Option_2" />
+                <ScalarProperty Name="Option_3" ColumnName="Option_3" />
+                <ScalarProperty Name="Option_4" ColumnName="Option_4" />
+                <ScalarProperty Name="Correct_answer" ColumnName="Correct_answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report_card">
+            <EntityTypeMapping TypeName="OnlineExam1Model.Report_card">
+              <MappingFragment StoreEntitySet="Report_card">
+                <ScalarProperty Name="ReportCard_id" ColumnName="ReportCard_id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Course_id" ColumnName="Course_id" />
+                <ScalarProperty Name="Level_1_Marks" ColumnName="Level_1_Marks" />
+                <ScalarProperty Name="Level_2_Marks" ColumnName="Level_2_Marks" />
+                <ScalarProperty Name="Level_3_Marks" ColumnName="Level_3_Marks" />
+                <ScalarProperty Name="Test_Date" ColumnName="Test_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Module">
+            <EntityTypeMapping TypeName="OnlineExam1Model.User_Module">
+              <MappingFragment StoreEntitySet="User_Module">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Secondname" ColumnName="Secondname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phone_no" ColumnName="Phone_no" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Date_of_birth" ColumnName="Date_of_birth" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="Year_of_Completion" ColumnName="Year_of_Completion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
