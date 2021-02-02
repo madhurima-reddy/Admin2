@@ -72,32 +72,15 @@ namespace Admin.Controllers
 
         // POST: api/Admin_Module
         [ResponseType(typeof(Admin_Module))]
-        public IHttpActionResult PostAdmin_Module(Admin_Module admin_Module)
+        public IHttpActionResult PostAdmin_Module(Admin_Module admin)
         {
-            if (!ModelState.IsValid)
+            Admin_Module temp = db.Admin_Module.Where(x => x.Email_id == admin.Email_id && x.Password == admin.Password).FirstOrDefault();
+            if (temp == null)
             {
-                return BadRequest(ModelState);
-            }
+                return Ok(0);
 
-            db.Admin_Module.Add(admin_Module);
-
-            try
-            {
-                db.SaveChanges();
             }
-            catch (DbUpdateException)
-            {
-                if (Admin_ModuleExists(admin_Module.Admin_id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = admin_Module.Admin_id }, admin_Module);
+            return Ok(1);
         }
 
         // DELETE: api/Admin_Module/5

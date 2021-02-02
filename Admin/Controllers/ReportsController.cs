@@ -21,11 +21,15 @@ namespace Admin.Controllers
         }
 
 
-        public IHttpActionResult GetReports(int Course_id, string state, string city, int marks)
+        public IHttpActionResult GetReports(string state, string city, string Course_name, string marks)
         {
-            var s=entities.Report_card.Where(x => x.Course_id == Course_id && x.User_Module.State == state && x.User_Module.City == city && x.Level_1_Marks > marks).FirstOrDefault();
-            return Ok(s);
+            return Ok(entities.adminreport(state,city,Course_name,marks));
 
         }
+           
+
+
+
+
     }
 }

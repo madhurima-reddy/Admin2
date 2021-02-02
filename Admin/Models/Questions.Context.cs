@@ -12,6 +12,8 @@ namespace Admin.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class OnlineExam1Entities : DbContext
     {
@@ -30,5 +32,26 @@ namespace Admin.Models
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Report_card> Report_card { get; set; }
         public virtual DbSet<User_Module> User_Module { get; set; }
+    
+        public virtual ObjectResult<adminreport_Result> adminreport(string state, string city, string course, Nullable<int> marks)
+        {
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            var marksParameter = marks.HasValue ?
+                new ObjectParameter("Marks", marks) :
+                new ObjectParameter("Marks", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<adminreport_Result>("adminreport", stateParameter, cityParameter, courseParameter, marksParameter);
+        }
     }
 }

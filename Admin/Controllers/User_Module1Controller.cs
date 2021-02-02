@@ -12,17 +12,17 @@ using Admin.Models;
 
 namespace Admin.Controllers
 {
-    public class User_ModuleController : ApiController
+    public class User_Module1Controller : ApiController
     {
         private OnlineExam1Entities db = new OnlineExam1Entities();
 
-        // GET: api/User_Module
+        // GET: api/User_Module1
         public IQueryable<User_Module> GetUser_Module()
         {
             return db.User_Module;
         }
 
-        // GET: api/User_Module/5
+        // GET: api/User_Module1/5
         [ResponseType(typeof(User_Module))]
         public IHttpActionResult GetUser_Module(int id)
         {
@@ -35,7 +35,7 @@ namespace Admin.Controllers
             return Ok(user_Module);
         }
 
-        // PUT: api/User_Module/5
+        // PUT: api/User_Module1/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser_Module(int id, User_Module user_Module)
         {
@@ -70,37 +70,20 @@ namespace Admin.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/User_Module
+        // POST: api/User_Module1
         [ResponseType(typeof(User_Module))]
-        public IHttpActionResult PostUser_Module(User_Module user_Module)
+        public IHttpActionResult PostUser_Module(User_Module user)
         {
-            if (!ModelState.IsValid)
+            User_Module temp = db.User_Module.Where(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
+            if (temp == null)
             {
-                return BadRequest(ModelState);
-            }
+                return Ok(0);
 
-            db.User_Module.Add(user_Module);
-
-            try
-            {
-                db.SaveChanges();
             }
-            catch (DbUpdateException)
-            {
-                if (User_ModuleExists(user_Module.User_id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = user_Module.User_id }, user_Module);
+            return Ok(1);
         }
 
-        // DELETE: api/User_Module/5
+        // DELETE: api/User_Module1/5
         [ResponseType(typeof(User_Module))]
         public IHttpActionResult DeleteUser_Module(int id)
         {

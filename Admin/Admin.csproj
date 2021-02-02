@@ -174,10 +174,13 @@
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\UserRegController.cs" />
-    <Compile Include="Controllers\User_ModuleController.cs" />
+    <Compile Include="Controllers\User_Module1Controller.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\adminreport_Result.cs">
+      <DependentUpon>Questions.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin_Module.cs">
       <DependentUpon>Questions.tt</DependentUpon>

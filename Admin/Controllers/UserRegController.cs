@@ -17,6 +17,7 @@ namespace Admin.Controllers
             return Ok(entities.User_Module);
         }
 
+
         public IHttpActionResult PostRegister(User_Module r)
         {
             User_Module p = entities.User_Module.Find(r.User_id);
