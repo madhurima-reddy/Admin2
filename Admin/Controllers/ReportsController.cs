@@ -23,7 +23,7 @@ namespace Admin.Controllers
 
         public IHttpActionResult GetReports(string state, string city, string Course_name, string marks)
         {
-            return Ok(entities.adminreport(state,city,Course_name,marks));
+            return Ok(entities.adminreport3(state,city,Course_name,marks));
 
         }
            

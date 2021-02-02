@@ -33,7 +33,7 @@ namespace Admin.Models
         public virtual DbSet<Report_card> Report_card { get; set; }
         public virtual DbSet<User_Module> User_Module { get; set; }
     
-        public virtual ObjectResult<adminreport_Result> adminreport(string state, string city, string course, Nullable<int> marks)
+        public virtual ObjectResult<adminreport_Result> adminreport(string state, string city, string course, string marks)
         {
             var stateParameter = state != null ?
                 new ObjectParameter("State", state) :
@@ -47,11 +47,74 @@ namespace Admin.Models
                 new ObjectParameter("Course", course) :
                 new ObjectParameter("Course", typeof(string));
     
-            var marksParameter = marks.HasValue ?
+            var marksParameter = marks != null ?
                 new ObjectParameter("Marks", marks) :
-                new ObjectParameter("Marks", typeof(int));
+                new ObjectParameter("Marks", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<adminreport_Result>("adminreport", stateParameter, cityParameter, courseParameter, marksParameter);
+        }
+    
+        public virtual ObjectResult<adminreport1_Result> adminreport1(string state, string city, string course, string marks)
+        {
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            var marksParameter = marks != null ?
+                new ObjectParameter("Marks", marks) :
+                new ObjectParameter("Marks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<adminreport1_Result>("adminreport1", stateParameter, cityParameter, courseParameter, marksParameter);
+        }
+    
+        public virtual ObjectResult<adminreport2_Result> adminreport2(string state, string city, string course, string marks)
+        {
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            var marksParameter = marks != null ?
+                new ObjectParameter("Marks", marks) :
+                new ObjectParameter("Marks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<adminreport2_Result>("adminreport2", stateParameter, cityParameter, courseParameter, marksParameter);
+        }
+    
+        public virtual ObjectResult<adminreport3_Result> adminreport3(string state, string city, string course, string marks)
+        {
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            var marksParameter = marks != null ?
+                new ObjectParameter("Marks", marks) :
+                new ObjectParameter("Marks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<adminreport3_Result>("adminreport3", stateParameter, cityParameter, courseParameter, marksParameter);
         }
     }
 }

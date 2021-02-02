@@ -104,7 +104,25 @@
           <Parameter Name="State" Type="varchar" Mode="In" />
           <Parameter Name="city" Type="varchar" Mode="In" />
           <Parameter Name="Course" Type="varchar" Mode="In" />
-          <Parameter Name="Marks" Type="int" Mode="In" />
+          <Parameter Name="Marks" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="adminreport1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="State" Type="varchar" Mode="In" />
+          <Parameter Name="city" Type="varchar" Mode="In" />
+          <Parameter Name="Course" Type="varchar" Mode="In" />
+          <Parameter Name="Marks" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="adminreport2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="State" Type="varchar" Mode="In" />
+          <Parameter Name="city" Type="varchar" Mode="In" />
+          <Parameter Name="Course" Type="varchar" Mode="In" />
+          <Parameter Name="Marks" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="adminreport3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="State" Type="varchar" Mode="In" />
+          <Parameter Name="city" Type="varchar" Mode="In" />
+          <Parameter Name="Course" Type="varchar" Mode="In" />
+          <Parameter Name="Marks" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="OnlineExam1ModelStoreContainer">
           <EntitySet Name="Admin_Module" EntityType="Self.Admin_Module" Schema="dbo" store:Type="Tables" />
@@ -252,7 +270,25 @@
             <Parameter Name="State" Mode="In" Type="String" />
             <Parameter Name="city" Mode="In" Type="String" />
             <Parameter Name="Course" Mode="In" Type="String" />
-            <Parameter Name="Marks" Mode="In" Type="Int32" />
+            <Parameter Name="Marks" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="adminreport1" ReturnType="Collection(OnlineExam1Model.adminreport1_Result)">
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="Course" Mode="In" Type="String" />
+            <Parameter Name="Marks" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="adminreport2" ReturnType="Collection(OnlineExam1Model.adminreport2_Result)">
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="Course" Mode="In" Type="String" />
+            <Parameter Name="Marks" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="adminreport3" ReturnType="Collection(OnlineExam1Model.adminreport3_Result)">
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="Course" Mode="In" Type="String" />
+            <Parameter Name="Marks" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="adminreport_Result">
@@ -260,6 +296,25 @@
           <Property Type="String" Name="State" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="City" Nullable="true" MaxLength="15" />
           <Property Type="String" Name="Minimum_Marks" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="adminreport1_Result">
+          <Property Type="String" Name="Course_name" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="Level_1_Marks" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="adminreport2_Result">
+          <Property Type="String" Name="Course_name" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Minimum_marks" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="adminreport3_Result">
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Fullname" Nullable="false" MaxLength="15" />
+          <Property Type="Int64" Name="Phone_no" Nullable="false" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="15" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -338,6 +393,37 @@
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Minimum_Marks" ColumnName="Minimum_Marks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="adminreport1" FunctionName="OnlineExam1Model.Store.adminreport1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineExam1Model.adminreport1_Result">
+                <ScalarProperty Name="Course_name" ColumnName="Course_name" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Level_1_Marks" ColumnName="Level_1_Marks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="adminreport2" FunctionName="OnlineExam1Model.Store.adminreport2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineExam1Model.adminreport2_Result">
+                <ScalarProperty Name="Course_name" ColumnName="Course_name" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Minimum_marks" ColumnName="Minimum_marks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="adminreport3" FunctionName="OnlineExam1Model.Store.adminreport3">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineExam1Model.adminreport3_Result">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Phone_no" ColumnName="Phone_no" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

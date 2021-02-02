@@ -179,6 +179,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\adminreport1_Result.cs">
+      <DependentUpon>Questions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\adminreport2_Result.cs">
+      <DependentUpon>Questions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\adminreport3_Result.cs">
+      <DependentUpon>Questions.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\adminreport_Result.cs">
       <DependentUpon>Questions.tt</DependentUpon>
     </Compile>
