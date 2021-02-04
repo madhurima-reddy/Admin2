@@ -32,6 +32,9 @@ namespace Admin.Controllers
                 entities.SaveChanges();
                 return Ok();
             }
+
+
+
         }
 
 

@@ -169,10 +169,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\Admin_ModuleController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\coursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\Report_cardController.cs" />
     <Compile Include="Controllers\UserRegController.cs" />
     <Compile Include="Controllers\User_Module1Controller.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
